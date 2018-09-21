@@ -1,0 +1,44 @@
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\AuthenticationService.exe.config
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\AuthenticationService.exe
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\AuthenticationService.pdb
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\Microsoft.IdentityModel.Logging.dll
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\Newtonsoft.Json.dll
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.pdb
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\Microsoft.IdentityModel.Logging.pdb
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\Microsoft.IdentityModel.Logging.xml
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\Microsoft.IdentityModel.Tokens.pdb
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\Newtonsoft.Json.xml
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\System.IdentityModel.Tokens.Jwt.pdb
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\obj\Debug\AuthenticationService.csprojAssemblyReference.cache
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\obj\Debug\AuthenticationService.csproj.CoreCompileInputs.cache
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\obj\Debug\AuthenticationService.csproj.CopyComplete
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\obj\Debug\AuthenticationService.exe
+C:\Users\mmosh\source\repos\AuthenticationService\AuthenticationService\obj\Debug\AuthenticationService.pdb
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\AuthenticationService.exe.config
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\AuthenticationService.exe
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\AuthenticationService.pdb
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\Microsoft.IdentityModel.Logging.dll
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\Newtonsoft.Json.dll
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.pdb
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\Microsoft.IdentityModel.Logging.pdb
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\Microsoft.IdentityModel.Logging.xml
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\Microsoft.IdentityModel.Tokens.pdb
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\Newtonsoft.Json.xml
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\System.IdentityModel.Tokens.Jwt.pdb
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\obj\Debug\AuthenticationService.csprojAssemblyReference.cache
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\obj\Debug\AuthenticationService.csproj.CoreCompileInputs.cache
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\obj\Debug\AuthenticationService.csproj.CopyComplete
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\obj\Debug\AuthenticationService.exe
+C:\Users\mmosh\Desktop\Moshe Files\JWTTuts\AuthenticationService C#\AuthenticationService\obj\Debug\AuthenticationService.pdb
