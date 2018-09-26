@@ -1,15 +1,10 @@
-﻿using System.Security.Claims;
+using System.Security.Claims;
 
-namespace AuthenticationService.Models
+namespace AuthenticationService.Models;
+
+public interface IAuthContainerModel
 {
-    public interface IAuthContainerModel
-    {
-        #region Members
-        string SecretKey { get; set; }
-        string SecurityAlgorithm { get; set; }
-        int ExpireMinutes { get; set; }
+    int ExpireMinutes { get; }
 
-        Claim[] Claims { get; set; }
-        #endregion
-    }
+    IReadOnlyCollection<Claim> Claims { get; }
 }

@@ -1,123 +1,99 @@
-﻿using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Collections.Generic;
+using System.Text;
 using AuthenticationService.Models;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 
-namespace AuthenticationService.Managers
+namespace AuthenticationService.Managers;
+
+public sealed class JWTService : IAuthService
 {
-    public class JWTService : IAuthService
+    private const string SigningAlgorithm = SecurityAlgorithms.HmacSha256;
+
+    private readonly SymmetricSecurityKey _signingKey;
+    private readonly string _issuer;
+    private readonly string _audience;
+
+    public JWTService(string secretKey, string issuer, string audience)
     {
-        #region Members
-        /// <summary>
-        /// The secret key we use to encrypt out token with.
-        /// </summary>
-        public string SecretKey { get; set; }
-        #endregion
+        ArgumentException.ThrowIfNullOrWhiteSpace(secretKey);
+        ArgumentException.ThrowIfNullOrWhiteSpace(issuer);
+        ArgumentException.ThrowIfNullOrWhiteSpace(audience);
 
-        #region Constructor
-        public JWTService(string secretKey)
+        byte[] keyBytes = Encoding.UTF8.GetBytes(secretKey);
+
+        if (keyBytes.Length < 32)
         {
-            SecretKey = secretKey;
-        }
-        #endregion
-
-        #region Public Methods
-        /// <summary>
-        /// Validates whether a given token is valid or not, and returns true in case the token is valid otherwise it will return false;
-        /// </summary>
-        /// <param name="token"></param>
-        /// <returns></returns>
-        public bool IsTokenValid(string token)
-        {
-            if (string.IsNullOrEmpty(token))
-                throw new ArgumentException("Given token is null or empty.");
-
-            TokenValidationParameters tokenValidationParameters = GetTokenValidationParameters();
-
-            JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-            try
-            {
-                ClaimsPrincipal tokenValid = jwtSecurityTokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken validatedToken);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            throw new ArgumentException(
+                "The HS256 signing key must contain at least 32 bytes.",
+                nameof(secretKey));
         }
 
-        /// <summary>
-        /// Generates token by given model.
-        /// Validates whether the given model is valid, then gets the symmetric key.
-        /// Encrypt the token and returns it.
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns>Generated token.</returns>
-        public string GenerateToken(IAuthContainerModel model)
+        _signingKey = new SymmetricSecurityKey(keyBytes);
+        _issuer = issuer;
+        _audience = audience;
+    }
+
+    public string GenerateToken(IAuthContainerModel model)
+    {
+        ArgumentNullException.ThrowIfNull(model);
+
+        if (model.Claims.Count == 0)
         {
-            if (model == null || model.Claims == null || model.Claims.Length == 0)
-                throw new ArgumentException("Arguments to create token are not valid.");
-
-            SecurityTokenDescriptor securityTokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(model.Claims),
-                Expires = DateTime.UtcNow.AddMinutes(Convert.ToInt32(model.ExpireMinutes)),
-                SigningCredentials = new SigningCredentials(GetSymmetricSecurityKey(), model.SecurityAlgorithm)
-            };
-
-            JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-            SecurityToken securityToken = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
-            string token = jwtSecurityTokenHandler.WriteToken(securityToken);
-
-            return token;
+            throw new ArgumentException(
+                "At least one claim is required to create a token.",
+                nameof(model));
         }
 
-        /// <summary>
-        /// Receives the claims of token by given token as string.
-        /// </summary>
-        /// <remarks>
-        /// Pay attention, one the token is FAKE the method will throw an exception.
-        /// </remarks>
-        /// <param name="token"></param>
-        /// <returns>IEnumerable of claims for the given token.</returns>
-        public IEnumerable<Claim> GetTokenClaims(string token)
+        var descriptor = new SecurityTokenDescriptor
         {
-            if (string.IsNullOrEmpty(token))
-                throw new ArgumentException("Given token is null or empty.");
+            Issuer = _issuer,
+            Audience = _audience,
+            Subject = new ClaimsIdentity(model.Claims),
+            Expires = DateTime.UtcNow.AddMinutes(model.ExpireMinutes),
+            SigningCredentials = new SigningCredentials(_signingKey, SigningAlgorithm)
+        };
 
-            TokenValidationParameters tokenValidationParameters = GetTokenValidationParameters();
+        var tokenHandler = CreateTokenHandler();
+        SecurityToken token = tokenHandler.CreateToken(descriptor);
 
-            JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-            try
-            {
-                ClaimsPrincipal tokenValid = jwtSecurityTokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken validatedToken);
-                return tokenValid.Claims;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        #endregion
+        return tokenHandler.WriteToken(token);
+    }
 
-        #region Private Methods
-        private SecurityKey GetSymmetricSecurityKey()
+    public ClaimsPrincipal ValidateToken(string token)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(token);
+
+        var validationParameters = new TokenValidationParameters
         {
-            byte[] symmetricKey = Convert.FromBase64String(SecretKey);
-            return new SymmetricSecurityKey(symmetricKey);
-        }
+            RequireSignedTokens = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = _signingKey,
+            ValidAlgorithms = [SigningAlgorithm],
+            ValidTypes = ["JWT"],
 
-        private TokenValidationParameters GetTokenValidationParameters()
+            ValidateIssuer = true,
+            ValidIssuer = _issuer,
+
+            ValidateAudience = true,
+            ValidAudience = _audience,
+
+            RequireExpirationTime = true,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.FromMinutes(1)
+        };
+
+        return CreateTokenHandler().ValidateToken(
+            token,
+            validationParameters,
+            out _);
+    }
+
+    private static JwtSecurityTokenHandler CreateTokenHandler()
+    {
+        return new JwtSecurityTokenHandler
         {
-            return new TokenValidationParameters()
-            {
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                IssuerSigningKey = GetSymmetricSecurityKey()
-            };
-        }
-        #endregion
+            MapInboundClaims = false
+        };
     }
 }
